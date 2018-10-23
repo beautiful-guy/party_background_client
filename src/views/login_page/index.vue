@@ -7,16 +7,16 @@
             <div class="two-input">
                 <el-input
                         placeholder="请输入用户名"
-                        v-model="username"
+                        v-model="formData.username"
                         clearable>
                 </el-input>
                 <el-input
                         placeholder="请输入密码"
                         type="password"
-                        v-model="password"
+                        v-model="formData.password"
                         clearable>
                 </el-input>
-                <el-Button type="primary" size="medium">登录</el-Button>
+                <el-Button type="primary" size="medium" @click="login">登录</el-Button>
             </div>
         </div>
     </div>
@@ -27,8 +27,24 @@
     name: "index",
     data(){
       return{
-        username:'',
-        password:''
+        formData:{
+          username:'',
+          password:''
+        }
+      }
+    },
+    methods:{
+      login(){
+        // let formdata = new FormData();
+        // formdata.append('username',this.formData.username);
+        // formdata.append('password',this.formData.password);
+        this.$axios.post('/login',this.formData).then(res=>{
+          if(res.code == 200){
+            this.$router.push('/layout')
+          }
+        }).catch(err=>{
+          console.log(err)
+        })
       }
     }
   }
