@@ -6,9 +6,8 @@
                         background-color="#545c64"
                         text-color="#fff"
                         active-text-color="#00b7ff"
-                        @select="skipToHomePage(1)"
                 >
-                    <el-menu-item index="1">
+                    <el-menu-item index="1" @click="skipToHomePage">
                         <i class="el-icon-location"></i>
                         <span slot="title">首页</span>
                     </el-menu-item>
@@ -70,7 +69,7 @@
       }
     },
     methods:{
-      skipToHomePage(index){
+      skipToHomePage(){
         this.$router.push('/layout/home_page')
         },
       skipToQuery(){

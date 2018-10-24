@@ -1,5 +1,9 @@
 <template>
     <div class="allAdmin-wrapper">
+        <el-breadcrumb separator="/">
+            <el-breadcrumb-item :to="{ path: '/layout/home_page' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/layout/query_allAdmin' }">管理员列表</el-breadcrumb-item>
+        </el-breadcrumb>
         <el-table
                 :data="adminData"
                 style="width: 100%">
@@ -46,6 +50,7 @@
                     <el-button
                             size="mini"
                             type="danger"
+                            @click="deleteAdmin(scope.row._id)"
                             >删除</el-button>
                 </template>
             </el-table-column>
@@ -67,8 +72,18 @@
       getalladmin(){
         this.$axios.get('/getAdmin?page=1&size=10').then(res=>{
           if(res.code == 200){
-            this.adminData.push(...res.data)
-            console.log(this.adminData)
+            this.adminData.push(...res.data);
+          }
+        }).catch(err=>{
+          console.log(err)
+        })
+      },
+      deleteAdmin(id){
+        this.$axios.delete(`/deleteAdmin?id=${id}`).then(res=>{
+          if(res.code == 200){
+            this.$message.success(res.msg)
+          }else{
+            this.$message.error(res.msg)
           }
         }).catch(err=>{
           console.log(err)

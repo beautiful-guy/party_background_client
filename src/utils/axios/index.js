@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = '/apis'
+const baseUrl = process.env.NODE_ENV == 'development' ? '/apis' : '/'
 const instance = axios.create({
   baseURL:baseUrl,
   timeout:15000
@@ -26,6 +26,9 @@ const xhr = {
   },
   post(url,data,config){
     return this.otherReq(url,data,config,'post')
+  },
+  delete(url,data,config){
+    return this.otherReq(url,data,config,'delete')
   }
 }
 export default xhr
