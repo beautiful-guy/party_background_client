@@ -72,7 +72,7 @@
       getalladmin(){
         this.$axios.get('/getAdmin?page=1&size=10').then(res=>{
           if(res.code == 200){
-            this.adminData.push(...res.data);
+            this.adminData = res.data
           }
         }).catch(err=>{
           console.log(err)
@@ -82,6 +82,7 @@
         this.$axios.delete(`/deleteAdmin?id=${id}`).then(res=>{
           if(res.code == 200){
             this.$message.success(res.msg)
+            this.getalladmin();
           }else{
             this.$message.error(res.msg)
           }

@@ -8,6 +8,8 @@ const  components={
   HomePage:()=>import('@/views/home_page'),
   QueryAllAdmin:()=>import('@/views/query_allAdmin'),
   AddAdministrator:()=>import('@/views/addAdministrator'),
+  GetAllNews:()=>import('@/views/getAllNews'),
+  AddNews:()=>import('@/views/addNews')
 }
 
 export default new Router({
@@ -37,6 +39,16 @@ export default new Router({
           path:"addAdministrator",
           name:'addAdministrator',
           component:components.AddAdministrator
+        },
+        {
+          path:'GetAllNews',
+          name:'GetAllNews',
+          component:components.GetAllNews
+        },
+        {
+          path:'addNews',
+          name:'addNews',
+          component:components.AddNews
         }
       ]
     }

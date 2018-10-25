@@ -40,7 +40,9 @@
         // formdata.append('password',this.formData.password);
         this.$axios.post('/login',this.formData).then(res=>{
           if(res.code == 200){
-            this.$router.push('/layout')
+            let id = res.data._id;
+            this.$store.commit('ChANGE_ID',id);
+            this.$router.push(`/layout`)
           }
         }).catch(err=>{
           console.log(err)

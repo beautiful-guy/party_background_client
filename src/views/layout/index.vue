@@ -17,18 +17,18 @@
                             <span>管理员管理</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item index="1-1" @click="skipToQuery">查看所有管理员</el-menu-item>
+                            <el-menu-item index="1-1" @click="skipToQuery">管理员列表</el-menu-item>
                             <el-menu-item index="1-2" @click="skipToAdd">添加管理员</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="3">
                         <template slot="title">
                             <i class="el-icon-menu"></i>
-                            <span>导航二</span>
+                            <span>新闻管理</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item index="2-1">选项1</el-menu-item>
-                            <el-menu-item index="2-2">选项2</el-menu-item>
+                            <el-menu-item index="2-1" @click="skipToNews">新闻列表</el-menu-item>
+                            <el-menu-item index="2-2" @click="addNews">添加新闻</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                 </el-menu>
@@ -38,15 +38,15 @@
                     <div class="header-content">
                         <p>欢迎来到党建后台管理页面</p>
                         <div class="userData">
-                            <img src="../../assets/logo.png" alt="">
-                            <el-dropdown trigger="click">
+                            <img :src="adminData.avatar" alt="">
+                            <el-dropdown trigger="click" @command="handleCommand">
                                 <span class="el-dropdown-link">
-                                    admin
+                                    {{adminData.username}}
                                     <i class="el-icon-caret-bottom el-icon--right"></i>
                                 </span>
                                 <el-dropdown-menu slot="dropdown">
                                     <el-dropdown-item>编辑个人信息</el-dropdown-item>
-                                    <el-dropdown-item>退出</el-dropdown-item>
+                                    <el-dropdown-item command="logout">退出</el-dropdown-item>
                                 </el-dropdown-menu>
                             </el-dropdown>
                         </div>
@@ -65,7 +65,7 @@
     name: "index",
     data(){
       return{
-
+        adminData:{}
       }
     },
     methods:{
@@ -77,7 +77,45 @@
       },
       skipToAdd(){
         this.$router.push('/layout/addAdministrator')
+      },
+      skipToNews(){
+        this.$router.push('/layout/getAllNews')
+      },
+      addNews(){
+        this.$router.push('/layout/addNews')
+      },
+      getAdminData(){
+        let id = this.$store.state.id;
+        this.$axios.get(`/getAdmin/${id}`).then(res=>{
+            if(res.code == 200){
+              this.adminData = res.data
+            }else {
+              this.$message.error('用户信息过期，请重新登录')
+            }
+        }).catch(err=>{
+          console.log(err)
+        })
+      },
+      handleCommand(logout){
+        this.$axios.get('/logOut').then(res=>{
+          if(res.code == 200){
+            this.$message.success(res.msg)
+            setTimeout(()=>{
+              this.$router.push('/')
+            },1000)
+          }else {
+            this.$message.error(res.msg)
+            setTimeout(()=>{
+              this.$router.push('/')
+            },1000)
+          }
+        }).catch(err=>{
+          console.log(err)
+        })
       }
+    },
+    created(){
+      this.getAdminData();
     }
   }
 </script>
