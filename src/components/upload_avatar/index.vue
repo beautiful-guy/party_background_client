@@ -44,7 +44,7 @@
     },
     watch:{
       value(val){
-        this.imageURL = val
+        this.imageUrl = val
       }
     }
   }

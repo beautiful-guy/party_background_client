@@ -18,9 +18,11 @@
                     width="120">
             </el-table-column>
             <el-table-column
-                    prop="sex"
                     label="性别"
                     width="80">
+                <template slot-scope="scope">
+                    <span v-text="scope.row.sex?'男':'女'"></span>
+                </template>
             </el-table-column>
             <el-table-column
                     prop="createTime"
@@ -46,6 +48,7 @@
                     <el-button
                             size="mini"
                             type="primary"
+                            @click="updateUser(scope.row._id)"
                             >编辑</el-button>
                     <el-button
                             size="mini"
@@ -89,6 +92,9 @@
         }).catch(err=>{
           console.log(err)
         })
+      },
+      updateUser(id){
+        this.$router.push(`/layout/updateUser?id=${id}`)
       }
     },
     created(){

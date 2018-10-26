@@ -31,6 +31,16 @@
                             <el-menu-item index="2-2" @click="addNews">添加新闻</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
+                    <el-submenu index="4">
+                        <template slot="title">
+                            <i class="el-icon-menu"></i>
+                            <span>轮播图管理</span>
+                        </template>
+                        <el-menu-item-group>
+                            <el-menu-item index="3-1" @click="skipToSwiperList">轮播图列表</el-menu-item>
+                            <el-menu-item index="3-2" @click="skipToAddSwiper">添加轮播图</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
                 </el-menu>
             </el-aside>
             <el-container>
@@ -83,6 +93,12 @@
       },
       addNews(){
         this.$router.push('/layout/addNews')
+      },
+      skipToSwiperList(){
+        this.$router.push('/layout/getSwiperList')
+      },
+      skipToAddSwiper(){
+        this.$router.push('/layout/addSwiper')
       },
       getAdminData(){
         let id = this.$store.state.id;

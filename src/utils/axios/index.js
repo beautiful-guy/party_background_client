@@ -29,6 +29,9 @@ const xhr = {
   },
   delete(url,data,config){
     return this.otherReq(url,data,config,'delete')
+  },
+  put(url,data,config){
+    return this.otherReq(url,data,config,'put')
   }
 }
 export default xhr

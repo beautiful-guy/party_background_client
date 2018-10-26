@@ -9,7 +9,11 @@ const  components={
   QueryAllAdmin:()=>import('@/views/query_allAdmin'),
   AddAdministrator:()=>import('@/views/addAdministrator'),
   GetAllNews:()=>import('@/views/getAllNews'),
-  AddNews:()=>import('@/views/addNews')
+  AddNews:()=>import('@/views/addNews'),
+  GetSwiperList:()=>import('@/views/getSwiperList'),
+  AddSwiper:()=>import('@/views/addSwiper'),
+  UpdateSwiper:()=>import('@/views/updateSwiper'),
+  UpdateUser:()=>import('@/views/updateUser')
 }
 
 export default new Router({
@@ -49,6 +53,26 @@ export default new Router({
           path:'addNews',
           name:'addNews',
           component:components.AddNews
+        },
+        {
+          path:'getSwiperList',
+          name:'getSwiperList',
+          component:components.GetSwiperList
+        },
+        {
+          path:'addSwiper',
+          name:'addSwiper',
+          component:components.AddSwiper
+        },
+        {
+          path:'updateSwiper',
+          name:'updateSwiper',
+          component:components.UpdateSwiper
+        },
+        {
+          path:'updateUser',
+          name:'updateUser',
+          component:components.UpdateUser
         }
       ]
     }
